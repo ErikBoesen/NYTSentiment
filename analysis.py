@@ -17,8 +17,7 @@ def tokenize(text):
     return [STEMMER.stem(t) for t in tokens]
 
 def analyze(path):
-
-    # load in a dataset into both testing and training data frames
+    # Load dataset into both testing and training data frames
     test_data_frame = pd.read_csv(path, header=None, delimiter='\t', quoting=3)
     test_data_frame.columns = ['Text']
     train_data_frame = pd.read_csv('training.csv', header=None, delimiter='\t', quoting=3)
@@ -42,7 +41,7 @@ def analyze(path):
     model = model.fit(X=fit_data[0:len(train_data_frame)], y=train_data_frame.Sentiment)
     pred = model.predict(fit_data[len(train_data_frame):])
 
-    # read each row of the text column along with the predicted sentiment
+    # Produce each row of output data
     # 1 => positive
     # 0 => negative
     for text, sentiment in zip(test_data_frame.Text, pred):
